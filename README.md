@@ -1,7 +1,7 @@
 # Pachyderm GitHub Actions
 
 <p align="center">
-	<img src='https://raw.githubusercontent.com/pachyderm/pachyderm/master/doc/docs/master/assets/images/Pachyderm-Character_600.png' height='100' title='Pachyderm'>
+	<img src='https://raw.githubusercontent.com/pachyderm/pachyderm/master/doc/docs/master/assets/images/Pachyderm-Character_600.png' height='175' title='Pachyderm'>
 </p>
 
 **(Alpha)** GitHub Action that automatically updates Pachyderm pipelines when  code is pushed.
