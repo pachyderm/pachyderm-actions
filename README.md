@@ -36,7 +36,7 @@ To authorize GitHub Actions to push new information to your cluster you must set
 
 ## Secrets
 
-1. `PACHYDERM_TOKEN`: This is an authentication token to access the Pachyderm cluster. You can generate it using `pachctl auth get-auth-token --ttl <some duration>`. For information on setting the `--ttl` duration, see [generating the Pachyderm authentication token](#generating-the-pachyderm-authentication-token) below.
+1. `PACHYDERM_TOKEN`: This is an authentication token to access the Pachyderm cluster. You can generate it using `pachctl auth get-auth-token --ttl <some duration>`. For information on setting the `--ttl` duration, see [generating the Pachyderm authentication token](https://github.com/pachyderm/pachyderm-gha#generating-the-pachyderm-authentication-token) below.
 
 2. `DOCKERHUB_TOKEN` and `DOCKERHUB_USERNAME`: for GitHub to be able to push the Docker image once it is built. For information on creating a Docker Hub token, see [Managing Access Tokens](https://docs.docker.com/docker-hub/access-tokens/).
 
