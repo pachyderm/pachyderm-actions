@@ -15,6 +15,7 @@ if [ -z "$VERSION" ]; then
   echo "VERSION is not set. Getting Latest."
   V=$(wget -qO -  https://api.github.com/repos/pachyderm/pachyderm/releases/latest | jq -r ".tag_name")
   VERSION=${V:1}
+  echo "Using ${VERSION} pachctl version."
 fi
 
 if [ -z "$PACHYDERM_CLUSTER_URL" ]; then
