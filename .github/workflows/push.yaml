@@ -1,6 +1,6 @@
 name: Docker Image CI
 
-on: [push]
+on: []
 
 jobs:
   build:
@@ -19,5 +19,5 @@ jobs:
       - name: Push docker image
         run: docker push ${DOCKER_IMAGE_NAME}:${GITHUB_SHA}
       - name: pachyderm-update-pipelines
-        uses: ./
+        uses: pipeline-action/.
         id: pup

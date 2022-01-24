@@ -1,6 +1,0 @@
-# action.yml
-name: 'Pachyderm Pipeline Updater'
-description: 'Update a Pachyderm pipeline using the standard pachctl docker image.'
-runs:
-  using: 'docker'
-  image: './pachyderm-github-action/Dockerfile'
