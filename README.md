@@ -13,7 +13,7 @@ Note: The GitHub action updates or creates the pipeline, but does not create or 
 To use the Pachyderm action in your workflow, use:
 
 ```yaml
-- uses: pachyderm/pachyderm-actions@master
+- uses: pachyderm/pachyderm-actions/pipeline-action@master
   env:
     PACHYDERM_CLUSTER_URL: ${{ secrets.PACHYDERM_URL }}
     PACHYDERM_TOKEN: ${{ secrets.PACHYDERM_TOKEN }}
@@ -48,7 +48,7 @@ To authorize GitHub Actions to push new information to your cluster you must set
 To use the `pachctl` action in your workflow, use:
 
 ```yaml
-- uses: pachyderm/pachctl-gha@master
+- uses: pachyderm/pachyderm-actions/pachctl-action@master
   env:
     PACHYDERM_TOKEN: ${{ secrets.PACHYDERM_TOKEN }}
     PACHYDERM_CLUSTER_URL: ${{ secrets.PACHYDERM_CLUSTER_URL }}
