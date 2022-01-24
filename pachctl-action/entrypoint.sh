@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 set -e
 
@@ -14,7 +14,7 @@ fi
 if [ -z "$VERSION" ]; then
   echo "VERSION is not set. Getting Latest."
   V=$(wget -qO -  https://api.github.com/repos/pachyderm/pachyderm/releases/latest | jq -r ".tag_name")
-  VERSION=${V:1}
+  VERSION=$(echo $V | cut -c 2-)
   echo "Using ${VERSION} pachctl version."
 fi
 
