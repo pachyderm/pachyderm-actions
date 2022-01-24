@@ -1,0 +1,6 @@
+name: 'pachctl'
+description: 'Run Pachyderm pachctl commands'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+
