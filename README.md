@@ -32,8 +32,8 @@ To authorize GitHub Actions to push new information to your cluster you must set
 
 2. `DOCKER_IMAGE_NAME`: Replace this with the base repo/tag combination for the Docker registry to which your image will be pushed.
 
-3. `PACHYDERM_PIPELINE_FILES`: A space-delimited list of pipeline specifications that depend on `DOCKER_IMAGE_NAME`.
-    In this project, there's just one pipeline, `regression.json`.
+3. `PACHYDERM_PIPELINE_FILES`: A space-delimited list of pipeline specifications that depend on `DOCKER_IMAGE_NAME`. It can either be
+    specific json files, or folders which contains multiple files.
 
 ### Secrets
 
