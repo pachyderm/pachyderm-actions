@@ -45,7 +45,10 @@ def get_multi_inputs(pipelinename, input_dict):
     input_list = []
     k = list(input_dict.keys())[0]
     for repo in input_dict[k]:
-        input_list.append((repo["pfs"]["repo"], pipelinename))
+        if 'pfs' in repo:
+            input_list.append((repo["pfs"]["repo"], pipelinename))
+        elif any([multi_type in repo for multi_type in ['union', 'cross', 'group', 'join']]):
+            return input_list + get_multi_inputs(pipelinename, repo)
     return input_list
 
 
@@ -56,6 +59,9 @@ def create_connections(pipelines):
         if "pfs" in v["input"]:
             input = v["input"]["pfs"]["repo"]
             connections.append((input, output))
+        elif "cron" in v["input"]:
+            # use the name "cron". Really just using this to count in_edges
+            connections.append(("cron", output))
         else:
             connections = connections + get_multi_inputs(k, v["input"])
     return connections
@@ -71,10 +77,19 @@ def update_image(pipelines, docker, sha):
     return updated_pipes
 
 
-def sort_pipelines(pipeline_connections):
+def build_pipeline_dag(pipeline_connections):
     graph = nx.DiGraph()
     graph.add_edges_from(pipeline_connections)
-    return list(nx.topological_sort(graph))
+    return graph
+
+
+def sort_pipelines(graph):
+    # Order the nodes topologically, only get nodes that have at least 1 input node (e.g. not a bare repo or cron)
+    return [n for n in nx.topological_sort(graph) if len(graph.in_edges(n)) > 0]
+
+
+def repo_dependencies(graph):
+    return [node for node in graph if len(graph.in_edges(node)) == 0 and node != 'cron']
 
 
 def update_pipeline(pipeline_order, pipelines):
@@ -91,7 +106,12 @@ def main():
     pipeline_dict = create_pipeline_dict(pipeline_files)
     updated_pipeline = update_image(pipeline_dict, docker_image_name, git_sha)
     conns = create_connections(updated_pipeline)
-    pipeline_order = sort_pipelines(conns)
+    graph = build_pipeline_dag(conns)
+    pipeline_order = sort_pipelines(graph)
+
+    # Below gets the repos that this pipeline needs that are not defined in the pipeline list.
+    # dependencies = repo_dependencies(graph)
+
     update_pipeline(pipeline_order, updated_pipeline)
 
 
